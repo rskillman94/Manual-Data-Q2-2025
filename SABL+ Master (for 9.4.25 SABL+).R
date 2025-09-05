@@ -43,7 +43,7 @@ cat("The SABL dataset projection is", crs_info$Name, "- EPSG:", crs_info$epsg, "
 # Manual Data Refresh Spring 2025 
 inventory <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/Inventory/2025-Q2 Refresh_Inventory.xlsx", 
                         sheet = "Comprehensive Inventory 2025-Q2") 
-cat("The inventory dataset queried on", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(inventory), "rows.\n")
+cat("The inventory dataset queried on 08/28/2025 contains", nrow(inventory), "rows.\n")
 #The inventory dataset queried on 08/29/2025 contains 3291 rows.
 
 # mDWW pull for confirmation
