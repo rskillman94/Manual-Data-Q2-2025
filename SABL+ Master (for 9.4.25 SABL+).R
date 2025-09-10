@@ -64,13 +64,13 @@ con <- dbConnect(odbc(),
 #### Load SDWIS data ####
 
 # Query System List from SDWIS TINWSYS
-tinwsys <- dbGetQuery(con, "SELECT *
-                    FROM [ReportDB].[SDWIS].[TINWSYS]") %>%
-  mutate(NUMBER0 = str_trim(NUMBER0)) # Remove any trailing or leading white space
+# tinwsys <- dbGetQuery(con, "SELECT *
+#                     FROM [ReportDB].[SDWIS].[TINWSYS]") %>%
+#   mutate(NUMBER0 = str_trim(NUMBER0)) # Remove any trailing or leading white space
 
-#tinwsys <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSYS_09.04.25.xlsx")
+tinwsys <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSYS_09.04.25.xlsx")
 
-cat("The SDWIS TINWSYS dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinwsys), "water systems.\n")
+#cat("The SDWIS TINWSYS dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinwsys), "water systems.\n")
 #The SDWIS TINWSYS dataset queried 09/04/2025 contains 15961 water systems.
 
 #openxlsx::write.xlsx(tinwsys, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSYS_09.04.25.xlsx")
@@ -78,12 +78,12 @@ cat("The SDWIS TINWSYS dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contai
 
 
 # Query Facility ID and Type from SDWIS TINWSF
-tinwsf <- dbGetQuery(con, "SELECT *
-                    FROM [ReportDB].[SDWIS].[TINWSF]")
+# tinwsf <- dbGetQuery(con, "SELECT *
+#                     FROM [ReportDB].[SDWIS].[TINWSF]")
 
-#tinwsf <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSF_09.04.25.xlsx")
+tinwsf <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSF_09.04.25.xlsx")
 
-cat("The SDWIS TINWSF dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinwsf), "water systems.\n")
+#cat("The SDWIS TINWSF dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinwsf), "water systems.\n")
 #The SDWIS TINWSF dataset queried 09/04/2025 contains 70361 water systems
 
 #openxlsx::write.xlsx(tinwsf, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSF_09.04.25.xlsx")
@@ -98,6 +98,7 @@ tinloc <- dbGetQuery(con, "SELECT *
 
 cat("The SDWIS TINLOC dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinloc), "water system lat lons.\n")
 #The SDWIS TINLOC dataset queried 09/04/2025 contains 52373 water system lat lons.
+#The SDWIS TINLOC dataset queried 09/10/2025 contains 52375 water system lat lons.
 
 #openxlsx::write.xlsx(tinloc, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINLOC_09.04.25.xlsx")
 
@@ -110,6 +111,7 @@ tinlgent <- dbGetQuery(con, "SELECT *
 
 cat("The SDWIS TINLGENT dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinlgent), "records.\n")
 #The SDWIS TINLGENT dataset queried 09/04/2025 contains 59220 records.
+#The SDWIS TINLGENT dataset queried 09/10/2025 contains 59257 records.
 
 #openxlsx::write.xlsx(tinlgent, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINLGENT_06.11.25.xlsx")
 
@@ -122,6 +124,7 @@ tinraa <- dbGetQuery(con, "SELECT *
 
 cat("The SDWIS TINRAA dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinraa), "records.\n")
 #The SDWIS TINRAA dataset queried 09/04/2025 contains 75409 records.
+#The SDWIS TINRAA dataset queried 09/10/2025 contains 75413 records.
 
 #openxlsx::write.xlsx(tinraa, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINRAA_06.11.25.xlsx")
 
@@ -138,12 +141,12 @@ cat("The SDWIS TINRAA dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contain
 
 
 # Query population from SDWIS TINPOPSV
-tinpopsv <- dbGetQuery(con, "SELECT *
-                       FROM [ReportDB].[SDWIS].[TINPOPSV]")
-# 
-# tinpopsv <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINPOPSV_09.04.25.xlsx")
-# 
-cat("The SDWIS TINPOPSV dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinpopsv), "water system population records.\n")
+# tinpopsv <- dbGetQuery(con, "SELECT *
+#                        FROM [ReportDB].[SDWIS].[TINPOPSV]")
+
+tinpopsv <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINPOPSV_09.04.25.xlsx")
+ 
+#cat("The SDWIS TINPOPSV dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinpopsv), "water system population records.\n")
 #The SDWIS TINPOPSV dataset queried 09/04/2025 contains 30419 water system population records.
 
 #openxlsx::write.xlsx(tinpopsv, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINPOPSV_09.04.25.xlsx")
@@ -151,12 +154,12 @@ cat("The SDWIS TINPOPSV dataset queried", format(Sys.Date(), "%m/%d/%Y"), "conta
 
 
 # Query service connections from SDWIS TINSCC
-tinscc <- dbGetQuery(con, "SELECT *
-                       FROM [ReportDB].[SDWIS].[TINSCC]")
+# tinscc <- dbGetQuery(con, "SELECT *
+#                        FROM [ReportDB].[SDWIS].[TINSCC]")
 
-# tinscc <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINSCC_09.04.25.xlsx")
-# 
-cat("The SDWIS TINSCC dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinscc), "water system service connection records.\n")
+tinscc <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINSCC_09.04.25.xlsx")
+
+#cat("The SDWIS TINSCC dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinscc), "water system service connection records.\n")
 #The SDWIS TINSCC dataset queried 09/04/2025 contains 67449 water system service connection records.
 
 #openxlsx::write.xlsx(tinscc, "C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINSCC_09.04.25.xlsx")
@@ -448,7 +451,7 @@ sablplus_0.5 <- inventory %>%
               dplyr::select(SABL_PWSID, FED_TYPE = D_PWS_FED_TYPE_CD, COUNTY = D_PRIN_CNTY_SVD_NM, POPULATION = D_POPULATION_COUNT, TINWSYS_IS_NUMBER), 
             by = c("SABL_PWSID")) %>% 
   left_join(tinscc_sum) %>% 
-  left_join(reg_agency)
+  left_join(reg_agency) %>%
   # left_join(mdww %>% 
   #             mutate(SABL_PWSID = paste0("CA", `Water System No.`)) %>%
   #             dplyr::select(SABL_PWSID, REGULATING_AGENCY = `Regulating Agency`)) %>%
@@ -461,14 +464,15 @@ sablplus_0.5 <- inventory %>%
              TRUE ~ FED_TYPE
            )) %>%
   dplyr::select(SABL_PWSID,
-                NAME = `Water System Name`,
+                NAME = WS_NAME,
                 BOUNDARY_T,
                 COUNTY,
                 REGULATING_AGENCY,
                 FED_TYPE,
                 CONNECT,
                 POPULATION, 
-                geometry)
+                geometry) %>%
+    mutate(COUNTY = ifelse(SABL_PWSID == "CA4301410", "SANTA CLARA", COUNTY)) #shouldn't even be doing this but I am 
 #mutate(ws_area = st_area(geometry)) 
 
 sablplus_1 <- inventory %>% rename(SABL_PWSID = 1) %>%
@@ -500,7 +504,8 @@ sablplus_1 <- inventory %>% rename(SABL_PWSID = 1) %>%
                 FED_TYPE,
                 CONNECT,
                 POPULATION, 
-                geometry)
+                geometry) %>%
+  mutate(COUNTY = ifelse(SABL_PWSID == "CA4301410", "SANTA CLARA", COUNTY)) #shouldn't even be doing this but I am 
 
 cat("There are", sum(is.na(sablplus_1$BOUNDARY_T)), "PWSIDs in the inventory of n =", nrow(inventory), "that do not have SABL boundaries.\n") #The dataset contains 5196 rows and 5174 unique PWSIDs.
 
