@@ -455,61 +455,63 @@ sablplus_0.5 <- inventory %>%
   # left_join(mdww %>% 
   #             mutate(SABL_PWSID = paste0("CA", `Water System No.`)) %>%
   #             dplyr::select(SABL_PWSID, REGULATING_AGENCY = `Regulating Agency`)) %>%
-  mutate(FED_TYPE = 
-           case_when(
-             FED_TYPE == "C" ~ "COMMUNITY",
-             FED_TYPE == "NC" ~ "NON-COMMUNITY",
-             FED_TYPE == "NP" ~ "NON-PUBLIC",
-             FED_TYPE == "NTNC" ~ "NON-TRANSIENT NON-COMMUNITY",
-             TRUE ~ FED_TYPE
-           )) %>%
+  # mutate(FED_TYPE = 
+  #          case_when(
+  #            FED_TYPE == "C" ~ "COMMUNITY",
+  #            FED_TYPE == "NC" ~ "NON-COMMUNITY",
+  #            FED_TYPE == "NP" ~ "NON-PUBLIC",
+  #            FED_TYPE == "NTNC" ~ "NON-TRANSIENT NON-COMMUNITY",
+  #            TRUE ~ FED_TYPE
+  #          )) %>%
   dplyr::select(SABL_PWSID,
                 NAME = WS_NAME,
                 BOUNDARY_T,
-                COUNTY,
-                REGULATING_AGENCY,
                 FED_TYPE,
-                CONNECT,
+                COUNTY,
                 POPULATION, 
+                TINWSYS_IS_NUMBER,
+                CONNECT,
+                REGULATING_AGENCY,
                 geometry) %>%
     mutate(COUNTY = ifelse(SABL_PWSID == "CA4301410", "SANTA CLARA", COUNTY)) #shouldn't even be doing this but I am 
 #mutate(ws_area = st_area(geometry)) 
 
-sablplus_1 <- inventory %>% rename(SABL_PWSID = 1) %>%
-  left_join(sabl %>%
-              dplyr::select(SABL_PWSID, BOUNDARY_T) %>%
-              rbind(ds_buffer_1)) %>%
-  st_as_sf() %>%
-  st_transform("EPSG:3310") %>% #reproject to California Teale Albers 
-  left_join(tinwsys %>% rename(SABL_PWSID = NUMBER0) %>% 
-              dplyr::select(SABL_PWSID, FED_TYPE = D_PWS_FED_TYPE_CD, COUNTY = D_PRIN_CNTY_SVD_NM, POPULATION = D_POPULATION_COUNT, TINWSYS_IS_NUMBER), 
-            by = c("SABL_PWSID")) %>% 
-  left_join(tinscc_sum) %>% 
-  left_join(mdww %>% 
-              mutate(SABL_PWSID = paste0("CA", `Water System No.`)) %>%
-              dplyr::select(SABL_PWSID, REGULATING_AGENCY = `Regulating Agency`)) %>%
-  mutate(FED_TYPE = 
-           case_when(
-             FED_TYPE == "C" ~ "COMMUNITY",
-             FED_TYPE == "NC" ~ "NON-COMMUNITY",
-             FED_TYPE == "NP" ~ "NON-PUBLIC",
-             FED_TYPE == "NTNC" ~ "NON-TRANSIENT NON-COMMUNITY",
-             TRUE ~ FED_TYPE
-           )) %>%
-  dplyr::select(SABL_PWSID,
-                NAME = `Water System Name`,
-                BOUNDARY_T,
-                COUNTY,
-                REGULATING_AGENCY,
-                FED_TYPE,
-                CONNECT,
-                POPULATION, 
-                geometry) %>%
-  mutate(COUNTY = ifelse(SABL_PWSID == "CA4301410", "SANTA CLARA", COUNTY)) #shouldn't even be doing this but I am 
-
-cat("There are", sum(is.na(sablplus_1$BOUNDARY_T)), "PWSIDs in the inventory of n =", nrow(inventory), "that do not have SABL boundaries.\n") #The dataset contains 5196 rows and 5174 unique PWSIDs.
-
-table(sablplus_0.5$BOUNDARY_T)
+# CURRENTLY DOESN'T REALLY WORK
+# sablplus_1 <- inventory %>% rename(SABL_PWSID = 1) %>%
+#   left_join(sabl %>%
+#               dplyr::select(SABL_PWSID, BOUNDARY_T) %>%
+#               rbind(ds_buffer_1)) %>%
+#   st_as_sf() %>%
+#   st_transform("EPSG:3310") %>% #reproject to California Teale Albers 
+#   left_join(tinwsys %>% rename(SABL_PWSID = NUMBER0) %>% 
+#               dplyr::select(SABL_PWSID, FED_TYPE = D_PWS_FED_TYPE_CD, COUNTY = D_PRIN_CNTY_SVD_NM, POPULATION = D_POPULATION_COUNT, TINWSYS_IS_NUMBER), 
+#             by = c("SABL_PWSID")) %>% 
+#   left_join(tinscc_sum) %>% 
+#   # left_join(mdww %>% 
+#   #             mutate(SABL_PWSID = paste0("CA", `Water System No.`)) %>%
+#   #             dplyr::select(SABL_PWSID, REGULATING_AGENCY = `Regulating Agency`)) %>%
+#   mutate(FED_TYPE = 
+#            case_when(
+#              FED_TYPE == "C" ~ "COMMUNITY",
+#              FED_TYPE == "NC" ~ "NON-COMMUNITY",
+#              FED_TYPE == "NP" ~ "NON-PUBLIC",
+#              FED_TYPE == "NTNC" ~ "NON-TRANSIENT NON-COMMUNITY",
+#              TRUE ~ FED_TYPE
+#            )) %>%
+#   dplyr::select(SABL_PWSID,
+#                 NAME = `Water System Name`,
+#                 BOUNDARY_T,
+#                 FED_TYPE,
+#                 COUNTY,
+#                 POPULATION, 
+#                 TINWSYS_IS_NUMBER,
+#                 CONNECT,
+#                 REGULATING_AGENCY,
+#                 geometry) %>%
+#   mutate(COUNTY = ifelse(SABL_PWSID == "CA4301410", "SANTA CLARA", COUNTY)) #shouldn't even be doing this but I am 
+# 
+# cat("There are", sum(is.na(sablplus_1$BOUNDARY_T)), "PWSIDs in the inventory of n =", nrow(inventory), "that do not have SABL boundaries.\n") #The dataset contains 5196 rows and 5174 unique PWSIDs.
+# setNames(c("SABL_PWSID", "NAME", "BOUNDARY_TYPE", "FED_TYPE", "COUNTY", "POPULATION", "TINWSYS_IS_NUMBER", "SERVICE_CONNECTIONS", "REGULATING_AGENCY", "geometry"))
 
 #### Write the SABL+ layer to a shapefile ####
 st_write(sablplus_0.5, "SABL+/Manual Data/SABL+ Manual Data Q2 2025/0.5 Miles/SABL+_0.5_09.04.25.shp")
