@@ -987,5 +987,4 @@ colSums(is.na(MHI_CLEAN))
 
 
 #### Write MHI data ####
-
 # openxlsx::write.xlsx(MHI_CLEAN,"C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/Master Data Files/Manual Data/Q2 2025_08.28.25/MHI_ManualData_09.10.25.xlsx") 
