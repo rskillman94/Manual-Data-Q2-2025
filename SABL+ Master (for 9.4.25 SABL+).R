@@ -68,7 +68,7 @@ con <- dbConnect(odbc(),
 #                     FROM [ReportDB].[SDWIS].[TINWSYS]") %>%
 #   mutate(NUMBER0 = str_trim(NUMBER0)) # Remove any trailing or leading white space
 
-tinwsys <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSYS_09.04.25.xlsx")
+tinwsys <- read_excel("C:/Users/rskillman/OneDrive - Water Boards/Documents/Data Work/SDWIS Saved Data/SDWIS_TINWSYS_09.04.25.xlsx") #MAKING A NOT THIS FILE NO LONGER EXISTS - it was accidentally rewritten on 9/11
 
 #cat("The SDWIS TINWSYS dataset queried", format(Sys.Date(), "%m/%d/%Y"), "contains", nrow(tinwsys), "water systems.\n")
 #The SDWIS TINWSYS dataset queried 09/04/2025 contains 15961 water systems.
