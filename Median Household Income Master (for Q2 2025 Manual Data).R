@@ -954,6 +954,8 @@ mhi_final <- inventory %>%
       TRUE ~ MHI_SOURCE
     )
   ) %>%
+  
+  #Replace Diablo Gran MHI per management instruction
   mutate(MHI = ifelse(PWSID == "CA5010039", 153241, MHI),
          MHI_SOURCE = ifelse(PWSID == "CA5010039", "SINGLE CDP", MHI_SOURCE)) %>%
   
