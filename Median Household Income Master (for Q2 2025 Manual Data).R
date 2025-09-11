@@ -28,6 +28,7 @@ library(tigris)
 library(corrplot)
 library(ggtext)
 library(scales)
+library(odbc)
 
 #### Open the Server Connection for SSMS Pulls ####
 
